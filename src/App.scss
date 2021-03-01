@@ -1,0 +1,26 @@
+@import './App.css';
+@import 'antd/dist/antd.css';
+
+.item64 {
+    position: absolute;
+    border: solid 2px rgba($color: rgb(255, 255, 255), $alpha: 0.5);
+    // border: solid 2px rgba($color: rgb(80, 30, 0), $alpha: 0.5);
+    // background-color: rgba(169, 142, 72, 0.50);
+    border-radius: 10%;
+    // left: 0px;
+    // top: 0px;
+}
+.language_selector {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.title {
+    font-size: 18px;
+    margin-left: 6px;
+}
+
+button {
+    margin-top: 20px;
+    margin-left: 5px;
+}

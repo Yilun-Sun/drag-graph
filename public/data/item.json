@@ -1,0 +1,96 @@
+{
+  "blood_pudding": {
+    "_id": "blood_pudding",
+    "Name": "Blood pudding",
+    "Type": "Food",
+    "DroppedBy": "Cauldron",
+    "Usage": "Eating",
+    "IconName": "BloodPudding_odf2rz",
+    "Properties": {
+      "Weight": 1.0,
+      "Stack": 1,
+      "Teleportable": true,
+      "CraftingMaterials": {
+        "Thistle": 2,
+        "Bloodbag": 2,
+        "Barleyflour": 4
+      }
+    },
+    "Effects": {
+      "MaxHealth": 90,
+      "MaxStamina": 50,
+      "Duration(s)": 2400,
+      "Healing(hp/tick)": 4
+    }
+  },
+  "wood_wall_45": {
+    "_id": "wood_wall_45",
+    "Name": "Wood wall 45°",
+    "Type": "Building",
+    "Source": "Workbench",
+    "IconName": "wood_wall_roof_45_f8odce",
+    "Properties": {
+      "Durability": null,
+      "Size": "2x2",
+      "Teleportable": true,
+      "CraftingMaterials": {
+        "Wood": 2
+      }
+    }
+  },
+  "helmet_bronze": {
+    "_id": "helmet_bronze",
+    "Name": "Bronze helmet",
+    "Type": "Armor",
+    "Source": "Workbench",
+    "IconName": "HelmetBronze_xxhpoy",
+    "Properties": {
+      "Weight": 3.0,
+      "Durability": 1000,
+      "CraftingLevel": 1,
+      "RepairLevel": 1,
+      "CraftingMaterials": {
+        "bronze": 5,
+        "deer_hide": 2
+      }
+    },
+    "Defensive": {
+      "Armor": 8
+    },
+    "Effects": {
+      "SetPieces": "Bronze armor (no effect)"
+    }
+  },
+  "bronze": {
+    "_id": "bronze",
+    "Name": "Bronze",
+    "Type": "Metal",
+    "DroppedBy": "Forge",
+    "Usage": ["Crafting","Building"],
+    "IconName": "bronze_tin0xk",
+    "SourceLevel": 1,
+    "Properties": {
+      "Weight": 12.0,
+      "Stack": 30,
+      "Teleportable": false,
+      "CraftingMaterials": {
+        "copper": 2,
+        "tin": 1
+      }
+    }
+  },
+  "deer_hide": {
+    "_id": "deer_hide",
+    "Name": "Deer hide",
+    "Type": "Material",
+    "DroppedBy": "deer",
+    "Usage": ["Crafting","Building"],
+    "IconName": "deerhide_jc1kgt",
+    "SourceLevel": 1,
+    "Properties": {
+      "Weight": 1.0,
+      "Stack": 50,
+      "Teleportable": true
+    }
+  }
+}

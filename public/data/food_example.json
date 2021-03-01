@@ -1,0 +1,23 @@
+{
+  "_id": "dummyid",
+  "Name":"Blood pudding",
+  "Type": "Food",
+  "Dropped by": "Cauldron",
+  "Usage": "Eating",
+  "Properties": {
+    "Weight": 1.0,
+    "Stack": 1,
+    "Teleportable": true,
+    "Crafting Materials": {
+      "Thistle": 2,
+      "Bloodbag": 2,
+      "Barley flour": 4
+    }
+  },
+  "Effects": {
+    "Max Health": 90,
+    "Max Stamina": 50,
+    "Duration(s)": 2400,
+    "Healing (hp/tick)": 4
+  }
+}
