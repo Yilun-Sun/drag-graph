@@ -5,13 +5,41 @@ import { useEffect, useState, useRef } from 'react';
 
 import React from 'react';
 // import { render } from 'react-dom';
-import { Stage, Layer, Circle, Shape } from 'react-konva';
+import { Stage, Layer, Circle, Shape, Text, Line } from 'react-konva';
+
+const INITIAL_TARGET_STATE = generateTargets();
+const INITIAL_CONNECTOR_STATE = generateConnectors();
+const GRID_SIZE = 50;
+const gridWidth = 1191;
+const linesA = [];
+const linesB = [];
+
+(function generateGrid() {
+  for (let i = 0; i < gridWidth / GRID_SIZE; i++) {
+    linesA.push(
+      <Line
+        strokeWidth={1}
+        dash={[10, 5]}
+        stroke={'rgba(255,255,255,0.2)'}
+        points={[i * GRID_SIZE, 0, i * GRID_SIZE, gridWidth]}
+      />
+    );
+    linesB.push(
+      <Line
+        strokeWidth={1}
+        dash={[10, 5]}
+        stroke={'rgba(255,255,255,0.2)'}
+        points={[0, i * GRID_SIZE, gridWidth, i * GRID_SIZE]}
+      />
+    );
+  }
+})();
 
 function generateTargets() {
   return [...Array(10)].map((_, i) => ({
     id: 'target-' + i.toString(),
-    x: (Math.random() * 0.8 + 0.1) * window.innerWidth,
-    y: (Math.random() * 0.8 + 0.1) * window.innerHeight,
+    x: Math.round((window.innerWidth * (Math.random() * 0.8 + 0.1)) / 50) * 50,
+    y: Math.round((window.innerHeight * (Math.random() * 0.8 + 0.1)) / 50) * 50,
     isDragging: false,
   }));
 }
@@ -38,9 +66,6 @@ function getControlPoints(startPoint, endPoint) {
   return [controlPoint1, controlPoint2];
 }
 
-const INITIAL_TARGET_STATE = generateTargets();
-const INITIAL_CONNECTOR_STATE = generateConnectors();
-const GRID_SIZE = 50;
 function App() {
   const outer = useRef(null);
   const [toolType, setToolType] = useState('drag');
@@ -129,7 +154,7 @@ function App() {
         (connectors[index].from === disconnectorCandidates[1] && connectors[index].to === disconnectorCandidates[0])
       ) {
         const needDeleteConnector = connectors.splice(index, 1)[0];
-        console.log(needDeleteConnector)
+        console.log(needDeleteConnector);
         setConnectors(connectors);
         const layer = outer.current.getLayer();
 
@@ -171,8 +196,12 @@ function App() {
     if (toolType === 'drag') {
       console.log('drag end');
       const newPosition = getGridXY(node.position().x, node.position().y);
-      node.x(newPosition.x);
-      node.y(newPosition.y);
+      e.target.to({
+        x: newPosition.x,
+        y: newPosition.y,
+      });
+      // node.x(newPosition.x);
+      // node.y(newPosition.y);
     }
   };
 
@@ -206,29 +235,48 @@ function App() {
 
   return (
     <div className='App'>
-      <button onClick={() => setToolType('drag')}>drag</button>
-      <button onClick={() => setToolType('connect')}>connect</button>
-      <button onClick={() => setToolType('disconnect')}>disconnect</button>
+      <div className='button-group'>
+        <button onClick={() => setToolType('drag')}>drag</button>
+        <button onClick={() => setToolType('connect')}>connect</button>
+        <button onClick={() => setToolType('disconnect')}>disconnect</button>
+      </div>
       <Stage width={window.innerWidth} height={window.innerHeight}>
+        <Layer>
+          {linesA}
+          {linesB}
+        </Layer>
         <Layer ref={outer}>
           {connectors.map((connector) => (
-            <Shape key={connector.id} stroke='grey' strokeWidth='5' id={connector.id} />
+            <Shape key={connector.id} stroke='#3886b9' strokeWidth='6' id={connector.id} />
           ))}
           {targets.map((target) => (
+            // <Group
+            //   key={target.id}
+            //   id={target.id}
+            //   x={target.x}
+            //   y={target.y}
+            //   onMouseDown={handleMouseDown}
+            // onDragStart={handleDragStart}
+            // onDragMove={handleDragMove}
+            // onDragEnd={handleDragEnd}
+            // draggable
+            // >
             <Circle
               key={target.id}
               id={target.id}
               x={target.x}
               y={target.y}
-              radius='25'
-              fill='#fafafa'
-              opacity={1.0}
-              // draggable
               onMouseDown={handleMouseDown}
               onDragStart={handleDragStart}
               onDragMove={handleDragMove}
               onDragEnd={handleDragEnd}
+              radius='25'
+              fill='#fafafa'
+              opacity={1.0}
+              // draggable
             />
+            // <Text fontSize={20} text={target.id} wrap='char' align='center' />
+            // </Group>
           ))}
         </Layer>
       </Stage>
